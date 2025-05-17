@@ -1,4 +1,4 @@
-import django_filters.rest_framework
+from django_filters import rest_framework as filters
 from rest_framework.generics import ListAPIView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -8,14 +8,22 @@ from simple_inventory.inventory.models import Inventory
 from simple_inventory.inventory.serializers import InventorySerializer
 
 
+class InventoryFilter(filters.FilterSet):
+    name = filters.CharFilter(lookup_expr="icontains")
+
+    class Meta:
+        model = Inventory
+        fields = ("name",)
+
+
 class InventoryListFilterView(ListAPIView):
     """
     Base API view for inventory list.
     """
 
     serializer_class = InventorySerializer
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ("name",)
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = InventoryFilter
 
     def get_queryset(self):
         return Inventory.objects.select_related("supplier").all()

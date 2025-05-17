@@ -7,41 +7,46 @@ Simple Inventory Management System
 
 ## Settings
 
-Moved to [settings](https://cookiecutter-django.readthedocs.io/en/latest/1-getting-started/settings.html).
+### Run locally
 
-## Basic Commands
+This will require docker and docker-compose.
 
-### Setting Up Your Users
+Using Make
 
-- To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+```bash
+make build
+make up
+```
 
-- To create a **superuser account**, use this command:
+or using docker-compose
 
-      $ python manage.py createsuperuser
-
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
-
-### Type checks
-
-Running type checks with mypy:
-
-    $ mypy simple_inventory
-
-### Test coverage
-
-To run the tests, check your test coverage, and generate an HTML coverage report:
-
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+```bash
+docker compose -f docker-compose.local.yml up -d
+```
 
 #### Running tests with pytest
 
-    $ pytest
+    $ pytest simple_inventory/inventory
 
-### Live reloading and Sass CSS compilation
+### Using the app
 
-Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/2-local-development/developing-locally.html#using-webpack-or-gulp).
+After you setup the docker container, you should be able to access the server on:
+
+1. http://locahost:8000/admin - Admin page
+2. http://locahost:8000/inventory - Inventory list
+3. http://locahost:8000/inventory/:pk - Inventory detail
+4. http://locahost:8000/api/inventory - Inventory List API
+
+You can create a superuser in the container and login into the above page. Note those page are being protected with session-based auth.
+
+#### Screenshot
+
+Inventory List
+![Inventory List](docs/screenshots/inventory-list.png)
+Inventory Detail
+![Inventory Detail](docs/screenshots/inventory-detail.png)
+Inventory List API
+![Inventory List API](docs/screenshots/inventory-list-api.png)
 
 ## Deployment
 

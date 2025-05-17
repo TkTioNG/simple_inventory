@@ -5,6 +5,12 @@ Simple Inventory Management System
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
+This project is scaffolded by cookiecutter-django due to it provides full linting, typechecking and containerization.
+
+For the code that you may concern, please look at:
+
+- simple_inventory/inventory/\*
+
 ## Settings
 
 ### Run locally

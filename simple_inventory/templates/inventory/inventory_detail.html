@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Inventory:
+  {{ inventory.name }}
+{% endblock title %}
+{% block content %}
+  <div class="container row pt-4">
+    <div class="col-4">
+      <img src="{% static 'images/inventory.jpg' %}"
+           alt="Inventory"
+           class="img-fluid" />
+    </div>
+    <div class="col">
+      <h2>{{ inventory.name }}</h2>
+      <h6 class="text-muted">Description</h6>
+      <p>{{ inventory.description }}</p>
+      <h6 class="text-muted">Note</h6>
+      <p>{{ inventory.note }}</p>
+      <h6 class="text-muted">Stock</h6>
+      <p>{{ inventory.stock }}</p>
+      <h6 class="text-muted">Availability</h6>
+      <p>{{ inventory.availability }}</p>
+      <h6 class="text-muted">Supplier</h6>
+      <p>{{ inventory.supplier.name }}</p>
+    </div>
+  </div>
+  <a class="btn btn-primary" href="{% url 'inventory:inventory-list' %}">Back</a>
+{% endblock content %}

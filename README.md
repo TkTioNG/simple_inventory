@@ -13,6 +13,10 @@ For the code that you may concern, please look at:
 
 ## Settings
 
+Before proceed, please check the local envs in. .envs/.local/\*.
+
+You can set the super username and password and db connections
+
 ### Run locally
 
 This will require docker and docker-compose.
@@ -30,20 +34,37 @@ or using docker-compose
 docker compose -f docker-compose.local.yml up -d
 ```
 
-#### Running tests with pytest
-
-    $ pytest simple_inventory/inventory
-
 ### Using the app
 
-After you setup the docker container, you should be able to access the server on:
+After you setup the docker container, you can proceed to create a superuser in the django container to access the admin and inventory page.
+
+If you have set the .envs/.local/.django superuser vars correctly, you can login with username of `DJANGO_SUPERUSER_USERNAME` and password of `DJANGO_SUPERUSER_PASSWORD`.
+
+```bash
+python manage.py createsuperuser
+```
+
+> [!NOTE]
+> Make sure that all migrations are rightfully applied.
+>
+> ```bash
+> python manage.py migrate
+> ```
+
+Afterwards, you should be able to access the server on:
 
 1. http://locahost:8000/admin - Admin page
 2. http://locahost:8000/inventory - Inventory list
 3. http://locahost:8000/inventory/:pk - Inventory detail
 4. http://locahost:8000/api/inventory - Inventory List API
 
-You can create a superuser in the container and login into the above page. Note those page are being protected with session-based auth.
+Note all pages are being protected with session-based auth, login through authorized user is needed.
+
+#### Running tests with pytest
+
+```bash
+pytest simple_inventory/inventory
+```
 
 #### Screenshot
 

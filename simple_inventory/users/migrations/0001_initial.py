@@ -1,10 +1,26 @@
+import os
+
 import django.contrib.auth.models
 import django.contrib.auth.validators
 import django.utils.timezone
 from django.db import migrations
 from django.db import models
 
-import simple_inventory.users.models
+
+def create_superuser(apps, schema_editor):
+    User = apps.get_model("users", "User")
+    db_alias = schema_editor.connection.alias
+
+    username = os.environ.get("DJANGO_SUPERUSER_USERNAME")
+    email = os.environ.get("DJANGO_SUPERUSER_EMAIL")
+    password = os.environ.get("DJANGO_SUPERUSER_PASSWORD")
+
+    if username and email and password:
+        User.objects.create_superuser(
+            username,
+            email=email,
+            password=password,
+        )
 
 
 class Migration(migrations.Migration):
@@ -123,4 +139,5 @@ class Migration(migrations.Migration):
                 ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
+        migrations.RunPython(create_superuser),
     ]

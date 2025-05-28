@@ -274,3 +274,4 @@ simple_inventory/media/
 .ipython/
 .env
 .envs/*
+!.envs/.local/
